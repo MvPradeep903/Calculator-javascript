@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 100%;
+        }
+        .display input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: right;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .calculator div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .calculator input[type="button"] {
+            width: 22%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .calculator input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        .equal {
+            width: 48%;
+            background-color: #28a745;
+        }
+        .equal:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form id="calcForm">
+                <div class="display">
+                    <input type="text" id="display" disabled>
+                </div>
+                <div>
+                    <input type="button" value="AC" id="clear">
+                    <input type="button" value="DE" id="delete">
+                    <input type="button" value="." id="dot">
+                    <input type="button" value="/" id="divide">
+                </div>
+                <div>
+                    <input type="button" value="7" id="seven">
+                    <input type="button" value="8" id="eight">
+                    <input type="button" value="9" id="nine">
+                    <input type="button" value="*" id="multiply">
+                </div>
+                <div>
+                    <input type="button" value="4" id="four">
+                    <input type="button" value="5" id="five">
+                    <input type="button" value="6" id="six">
+                    <input type="button" value="-" id="subtract">
+                </div>
+                <div>
+                    <input type="button" value="1" id="one">
+                    <input type="button" value="2" id="two">
+                    <input type="button" value="3" id="three">
+                    <input type="button" value="+" id="add">
+                </div>
+                <div>
+                    <input type="button" value="00" id="doubleZero">
+                    <input type="button" value="0" id="zero">
+                    <input type="button" value="=" id="equal" class="equal">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('input[type="button"]');
+
+        // Adding event listeners to each button
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.value;
+
+                switch (value) {
+                    case 'AC':
+                        display.value = '';
+                        break;
+                    case 'DE':
+                        display.value = display.value.slice(0, -1);
+                        break;
+                    case '=':
+                        try {
+                            display.value = eval(display.value);
+                        } catch {
+                            display.value = 'Error';
+                        }
+                        break;
+                    default:
+                        display.value += value;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
